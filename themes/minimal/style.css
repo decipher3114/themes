@@ -1,5 +1,6 @@
 
-/* 2026-02-25T19-31-44 v1.6.11                      */
+
+/* 2026-03-05T21-09-41 v1.6.12                      */
 
 /* Install from Theme Marketplace to always have    */ 
 /* the latest version!                              */
@@ -89,7 +90,7 @@
   --transition-curve: cubic-bezier(0.4, 0, 0.2, 1);
   --background-image-transition: background 3s ease-in-out 5s;
   --blyrics-background-blur: 30px;
-  --blyrics-background-saturate: 1;
+  --blyrics-background-saturate: 1.4;
   --background-brightness: 0.35;
   --background-contrast: 0.90;
   --background-image-filter: saturate(var(--blyrics-background-saturate))
@@ -487,15 +488,38 @@ ytmusic-app-layout:not([player-ui-state="PLAYER_BAR_ONLY"])
 #player-bar-background.ytmusic-app-layout {
   background: transparent;
 }
+
 /* ## SECTION-13 - Bottom Left Nofication ######### */
 tp-yt-paper-toast #close-button {
   display: none !important;
 }
 
-tp-yt-paper-toast yt-touch-feedback-shape,
-tp-yt-paper-toast .yt-spec-touch-feedback-shape__fill,
-tp-yt-paper-toast .yt-spec-touch-feedback-shape__stroke {
-  pointer-events: none !important;
+#toast {
+  background-color: var(--ytmusic-brand-background-solid);
+  border: 1.5px solid oklch(1 0 0 / 0.1);
+  border-radius: 12px !important;
+}
+
+.yt-spec-button-shape-next--call-to-action-inverse.yt-spec-button-shape-next--text {
+  color: #2b87ff;
+}
+
+.yt-spec-button-shape-next--call-to-action-inverse.yt-spec-button-shape-next--text:hover {
+  background: oklch(from #2b87ff l c h / 0.13);
+}
+
+/* Only target toasts inside the action renderer */
+yt-notification-action-renderer #toast:not(:hover) {
+  animation: idontwannaseeyouanymore-billie 2.5s ease 2.5s forwards;
+}
+
+yt-notification-action-renderer #toast:hover {
+  animation: none !important;
+  opacity: 1 !important;
+  transform: translateY(0) !important;
+  transition:
+    opacity 0.3s ease,
+    transform 0.3s ease !important;
 }
 
 @keyframes idontwannaseeyouanymore-billie {
@@ -521,18 +545,9 @@ tp-yt-paper-toast .yt-spec-touch-feedback-shape__stroke {
   }
 }
 
-ytmusic-notification-action-renderer
-  tp-yt-paper-toast.paper-toast-open:not(:hover) {
-  animation: idontwannaseeyouanymore-billie 2.5s ease 2.5s forwards;
-}
-
-ytmusic-notification-action-renderer tp-yt-paper-toast.paper-toast-open:hover {
-  animation: none !important;
-  opacity: 1 !important;
-  transform: translateY(0) !important;
-  transition:
-    opacity 0.3s ease,
-    transform 0.3s ease !important;
+#text.yt-notification-action-renderer, #sub-text.yt-notification-action-renderer {
+    color: oklch(1 0 0);
+    opacity: 0.87;
 }
 
 /* ## SECTION-14 - Volume popup ################### */
@@ -1063,5 +1078,66 @@ ytmusic-player-page[is-mweb-modernization-enabled]
 #contentContainer
 {
 transition: transform 0.2s ease-out !important;
+}
+
+/* ### Section 31 - Translation etc entry ######### */
+.blyrics--romanized,
+.blyrics--translated {
+	animation: smoothReveal 0.3s ease backwards;
+	overflow: hidden;
+	transform-origin: top;
+}
+.blyrics--translated {
+	animation-delay: 0.15s;
+}
+@keyframes smoothReveal {
+	from {
+		transform: translateY(-6px) scaleY(0.98);
+		opacity: 0;
+		margin-top: 0;
+		margin-bottom: 0;
+		padding-top: 0;
+		max-height: 0;
+		padding-bottom: 0;
+	}
+	to {
+		transform: translateY(0) scaleY(1);
+		max-height: 500px;
+	}
+}
+
+/* ### Section 32 - Progress bar and knob ######### */
+#hover-time-info.ytmusic-player-bar {
+	background-color: #e3e3e3;
+	color: oklch(0 0 0 / 0.87);
+	font-size: 13px;
+	font-weight: 600;
+	padding: 5px 12px;
+	border-radius: 12px;
+	top: -42px;
+	transform: translateX(-50%);
+	box-shadow: 0 4px 12px oklch(0 0 0 / 0.2);
+}
+tp-yt-paper-slider {
+	--paper-progress-active-color: var(--base-white);
+	--paper-progress-secondary-color: oklch(1 0 0 / 0.15);
+}
+#progress-bar.ytmusic-player-bar[focused],
+ytmusic-player-bar:hover #progress-bar.ytmusic-player-bar,
+#progress-bar.ytmusic-player-controls {
+	--paper-slider-knob-color: var(--base-white-half);
+	--paper-slider-knob-start-color: var(--base-white-half);
+	--paper-slider-knob-start-border-color: var(--base-white-half);
+}
+.slider-knob-inner.tp-yt-paper-slider {
+	width: calc(100% - 10px) !important;
+	height: calc(100% - 20px) !important;
+	border-radius: 100px !important;
+	position: absolute !important;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	margin: auto !important;
 }
 
