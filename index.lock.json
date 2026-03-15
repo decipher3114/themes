@@ -55,8 +55,16 @@
       "locked": "2026-03-12T23:15:36Z",
       "repo": "decipher3114/better-lyrics-expressive",
       "version": "1.3.4"
+    },
+    {
+      "commit": "b59e54f238c45ed1be6d7dbfc17c85836954ed82",
+      "id": "wolfthee-theme-bytm",
+      "integrity": "sha256-9c2607115133a5286ee22651f9cfb2afb423ad18c01221f83d7c55e962e353d9",
+      "locked": "2026-03-15T09:26:24Z",
+      "repo": "WolftheE/better-ytm",
+      "version": "1.0.0"
     }
   ],
-  "updated": "2026-03-14T14:11:29Z",
+  "updated": "2026-03-15T09:26:24Z",
   "version": 1
 }
