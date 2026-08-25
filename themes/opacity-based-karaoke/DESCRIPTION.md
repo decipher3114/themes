@@ -1,6 +1,8 @@
 # Opacity-based Karaoke - Better Lyrics Theme
 
-Replaced background image karaoke with opacity-based karaoke. Visibility level of all the text in the lyrics can be easily edited.
+Replaced default karaoke with opacity-based karaoke. Visibility level of all the text in the lyrics can be easily edited.
+
+> Minimal theme can be disabled just by writing `off` in the `$enable-minimal: on;` option
 
 ### Four Distinct Richsync Styles
 
